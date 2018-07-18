@@ -89,7 +89,7 @@ fi
 source ~/.zsh_aliases
 
 #GITHUB API TOKEN
-export HOMEBREW_GITHUB_API_TOKEN="671eb68bbdc5aae6aa1cfa883d4fb1f1ec5cf3b5"
+source ~/.homebrew_github_key
 
 #P4 SETTINGS
 export P4CONFIG="$HOME/Workspace/ExpWeb/www/expweb/trunk/p4.ini"

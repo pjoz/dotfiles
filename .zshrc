@@ -87,6 +87,7 @@ fi
 
 # Alias path
 source ~/.zsh_aliases
+source ~/.private_aliases
 
 #GITHUB API TOKEN
 source ~/.homebrew_github_key
@@ -104,8 +105,7 @@ export PATH="$CUDA_HOME/bin:$PATH"
 source /usr/local/bin/virtualenvwrapper.sh
 
 # VAULT TEST AUTH
-export VAULT_ADDR="https://ewe-vault.test.expedia.com:8200"
-export VAULT_SSL_CERT="${HOME}/combined-ca.pem"
+source ~/.vault_env
 
 # DockRun
 dockrun(){
@@ -124,8 +124,9 @@ dockrun(){
 nvm use 6.11.0
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/pberkman/.sdkman"
-[[ -s "/Users/pberkman/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/pberkman/.sdkman/bin/sdkman-init.sh"	
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
 export PATH="$HOME/.yarn/bin:$PATH"
 
 # RUST

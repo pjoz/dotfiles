@@ -1,0 +1,6 @@
+[submodule ".vim/plugged/ale"]
+	path = .vim/plugged/ale
+	url = https://github.com/w0rp/ale
+[submodule ".vim/plugged/rainbow_csv"]
+	path = .vim/plugged/rainbow_csv
+	url = https://github.com/mechatroner/rainbow_csv

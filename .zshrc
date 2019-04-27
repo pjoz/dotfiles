@@ -1,6 +1,57 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
+# Customise the Powerlevel9k prompts
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+  dir
+  anaconda
+  aws
+  vcs
+  newline
+  status
+)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
+  battery
+  date
+  time
+)
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+
+
+# Custom JavaScript prompt
+POWERLEVEL9K_CUSTOM_JAVASCRIPT="echo -n '\ue781' JavaScript"
+POWERLEVEL9K_CUSTOM_JAVASCRIPT_FOREGROUND="black"
+POWERLEVEL9K_CUSTOM_JAVASCRIPT_BACKGROUND="yellow"
+
+# Custom Python prompt
+POWERLEVEL9K_CUSTOM_PYTHON="echo -n '\uf81f' Python"
+POWERLEVEL9K_CUSTOM_PYTHON_FOREGROUND="black"
+POWERLEVEL9K_CUSTOM_PYTHON_BACKGROUND="green"
+
+# Custom Anaconda prompt
+POWERLEVEL9K_PYTHON_ICON="\uf81f"
+POWERLEVEL9K_ANACONDA_BACKGROUND="green"
+POWERLEVEL9K_ANACONDA_FOREGROUND="black"
+
+# Custom React prompt
+POWERLEVEL9K_CUSTOM_REACTJS="echo -n '\ue7ba' ReactJS"
+POWERLEVEL9K_CUSTOM_REACTJS_FOREGROUND="black"
+POWERLEVEL9K_CUSTOM_REACTJS_BACKGROUND="purple"
+
+# Custom Java prompt
+POWERLEVEL9K_CUSTOM_JAVA="echo -n '\ue738' Java"
+POWERLEVEL9K_CUSTOM_JAVA_FOREGROUND="black"
+POWERLEVEL9K_CUSTOM_JAVA_BACKGROUND="red"
+
+# Custom Ruby prompt
+POWERLEVEL9K_CUSTOM_RUBY="echo -n '\ue21e' Ruby"
+POWERLEVEL9K_CUSTOM_RUBY_FOREGROUND="black"
+POWERLEVEL9K_CUSTOM_RUBY_BACKGROUND="red"
+
+# Load Nerd Fonts with Powerlevel9k theme for Zsh
+POWERLEVEL9K_MODE='nerdfont-complete'
+source $ZSH/custom/themes/powerlevel9k/powerlevel9k.zsh-theme
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -101,6 +152,12 @@ export CUDA_HOME=/usr/local/cuda
 export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$CUDA_HOME/lib"
 export PATH="$CUDA_HOME/bin:$PATH"
 
+# zsh notify
+zstyle ':notify:*' error-title "Command failed"
+zstyle ':notify:*' success-title "Command finished"
+zstyle ':notify:*' error-sound "Glass"
+zstyle ':notify:*' success-sound "default"
+
 # Virtualenv/VirtualenvWrapper
 source /usr/local/bin/virtualenvwrapper.sh
 
@@ -133,7 +190,7 @@ export PATH="$HOME/.yarn/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 # ANACONDA
-export PATH="$HOME/anaconda3/bin:$PATH"
+# export PATH="$HOME/anaconda3/bin:$PATH"  # commented out by conda initialize
 
 # HOMEDIR BIN
 export PATH="$HOME/bin:$PATH"
@@ -144,3 +201,19 @@ export PATH="$HOME/bin:$PATH"
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f $HOME/.nvm/versions/node/v6.11.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . $HOME/.nvm/versions/node/v6.11.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/pberkman/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/pberkman/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/pberkman/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/pberkman/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+

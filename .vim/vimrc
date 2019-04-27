@@ -1,0 +1,69 @@
+"Syntax
+syntax enable
+set background=dark
+colorscheme solarized
+
+"Spacing
+set tabstop=4
+set softtabstop=4
+set expandtab
+
+"UI
+set number
+filetype indent on
+set showmatch
+
+"Search
+set hlsearch
+set incsearch
+
+"Keyboard shortcuts
+map <C-J> <C-W><C-J>
+map <C-K> <C-W><C-K>
+map <C-L> <C-W><C-L>
+map <C-H> <C-W><C-H>
+
+"Call vim-plug
+call plug#begin('~/.vim/plugged')
+
+"Plugins
+Plug 'altercation/vim-colors-solarized'
+Plug 'mechatroner/rainbow_csv'
+Plug 'elzr/vim-json'
+Plug 'scrooloose/nerdtree'
+Plug 'szymonmaszke/vimpyter'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'w0rp/ale'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'ryanoasis/vim-devicons'
+
+"Initialize plugin system
+call plug#end()
+
+"Configure NERDTree
+autocmd vimenter * NERDTree
+autocmd vimenter * vertical resize 50 
+autocmd StdinReadPre * let s:std_in=1
+map <C-n> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:NERDTreeNodeDelimiter = "\u00a0"
+autocmd VimEnter * wincmd p
+
+"Configure Vimpyter
+autocmd Filetype ipynb nmap <silent><Leader>b :VimpyterInsertPythonBlock<CR>
+autocmd Filetype ipynb nmap <silent><Leader>j :VimpyterStartJupyter<CR>
+autocmd Filetype ipynb nmap <silent><Leader>n :VimpyterStartNteract<CR>
+
+"Configure Ctrl-P
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+" Ignore these directories
+set wildignore+=*/build/**
+set wildignore+=*/target/**
+set wildignore+=*/bin/**
+set wildignore+=*/node_modules/**
+
+"Configure airline
+let g:airline#extensions#tabline#enabled = 1

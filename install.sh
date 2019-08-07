@@ -81,6 +81,17 @@ chunk()
   brew install --HEAD --with-logging  koekeishiya/formulae/skhd
 }
 
+sdkman()
+{
+  curl -s "https://get.sdkman.io" | bash
+  source "$HOME/.sdkman/bin/sdkman-init.sh"
+}
+
+conda()
+{
+  brew cask install anaconda
+}
+
 if ! which brew; then
   get_brew
 fi
@@ -91,6 +102,8 @@ then
   zsh_theme
   fonts
   chunk
+  sdkman
+  conda
 fi
 
 if [ "$INSTALL" = "fonts" ]
@@ -99,6 +112,9 @@ then
 fi
 
 ln -s dotfiles/.zshrc
-ln -s dotfiles/.vimrc
+ln -s dotfiles/.zsh_aliases
+ln -s dotfiles/.oh-my-zsh
+ln -s dotfiles/.vim
 ln -s dotfiles/.chunkwmrc
 ln -s dotfiles/.skhdrc
+ln -s dotfiles/.get_python_version.py

@@ -65,5 +65,8 @@ set wildignore+=*/target/**
 set wildignore+=*/bin/**
 set wildignore+=*/node_modules/**
 
+"Configure TabNine
+"set rtp+=~/Workspace/Work/github/tabnine-vim
+
 "Configure airline
 let g:airline#extensions#tabline#enabled = 1

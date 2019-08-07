@@ -3,20 +3,44 @@ export ZSH=$HOME/.oh-my-zsh
 
 # Customise the Powerlevel9k prompts
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+  status
   dir
+  custom_python
   anaconda
+  custom_java
   aws
   vcs
-  newline
-  status
 )
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
   battery
+  custom_wifi_signal
   date
   time
 )
-POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 
+POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
+POWERLEVEL9K_SHORTEN_STRATEGY="truncate_beginning"
+
+# VCS icons
+POWERLEVEL9K_VCS_GIT_ICON=$'\uf1d2 '
+POWERLEVEL9K_VCS_GIT_GITHUB_ICON=$'\uf113 '
+POWERLEVEL9K_VCS_GIT_GITLAB_ICON=$'\uf296 '
+POWERLEVEL9K_VCS_BRANCH_ICON=$''
+POWERLEVEL9K_VCS_STAGED_ICON=$'\uf055'
+POWERLEVEL9K_VCS_UNSTAGED_ICON=$'\uf421'
+POWERLEVEL9K_VCS_UNTRACKED_ICON=$'\uf00d'
+POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON=$'\uf0ab '
+POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON=$'\uf0aa '
+
+# VCS colours
+POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='orange'
+POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='black'
+POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='yellow'
+POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='black'
+POWERLEVEL9K_VCS_CLEAN_BACKGROUND='darkgreen'
+POWERLEVEL9K_VCS_CLEAN_FOREGROUND='grey19'
 
 # Custom JavaScript prompt
 POWERLEVEL9K_CUSTOM_JAVASCRIPT="echo -n '\ue781' JavaScript"
@@ -24,14 +48,10 @@ POWERLEVEL9K_CUSTOM_JAVASCRIPT_FOREGROUND="black"
 POWERLEVEL9K_CUSTOM_JAVASCRIPT_BACKGROUND="yellow"
 
 # Custom Python prompt
-POWERLEVEL9K_CUSTOM_PYTHON="echo -n '\uf81f' Python"
+POWERLEVEL9K_CUSTOM_PYTHON="echo -n '\uf81f' $(python ~/.get_python_version.py)"
 POWERLEVEL9K_CUSTOM_PYTHON_FOREGROUND="black"
 POWERLEVEL9K_CUSTOM_PYTHON_BACKGROUND="green"
-
-# Custom Anaconda prompt
-POWERLEVEL9K_PYTHON_ICON="\uf81f"
 POWERLEVEL9K_ANACONDA_BACKGROUND="green"
-POWERLEVEL9K_ANACONDA_FOREGROUND="black"
 
 # Custom React prompt
 POWERLEVEL9K_CUSTOM_REACTJS="echo -n '\ue7ba' ReactJS"
@@ -39,14 +59,33 @@ POWERLEVEL9K_CUSTOM_REACTJS_FOREGROUND="black"
 POWERLEVEL9K_CUSTOM_REACTJS_BACKGROUND="purple"
 
 # Custom Java prompt
-POWERLEVEL9K_CUSTOM_JAVA="echo -n '\ue738' Java"
+POWERLEVEL9K_CUSTOM_JAVA="echo -n '\ue738' $(sdk current java | awk '/java/{print $4}')"
 POWERLEVEL9K_CUSTOM_JAVA_FOREGROUND="black"
 POWERLEVEL9K_CUSTOM_JAVA_BACKGROUND="red"
 
-# Custom Ruby prompt
-POWERLEVEL9K_CUSTOM_RUBY="echo -n '\ue21e' Ruby"
-POWERLEVEL9K_CUSTOM_RUBY_FOREGROUND="black"
-POWERLEVEL9K_CUSTOM_RUBY_BACKGROUND="red"
+# Custom Wifi prompt
+POWERLEVEL9K_CUSTOM_WIFI_SIGNAL="zsh_wifi_signal"
+POWERLEVEL9K_CUSTOM_WIFI_SIGNAL_BACKGROUND="white"
+POWERLEVEL9K_CUSTOM_WIFI_SIGNAL_FOREGROUND="black"
+
+zsh_wifi_signal(){
+        local output=$(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport -I)
+        local airport=$(echo $output | grep 'AirPort' | awk -F': ' '{print $2}')
+
+        if [ "$airport" = "Off" ]; then
+                local color='%F{black}'
+                echo -n "%{$color%}Wifi Off"
+        else
+                local ssid=$(echo $output | grep ' SSID' | awk -F': ' '{print $2}')
+                local speed=$(echo $output | grep 'lastTxRate' | awk -F': ' '{print $2}')
+                local color='%F{black}'
+
+                [[ $speed -gt 100 ]] && color='%F{black}'
+                [[ $speed -lt 50 ]] && color='%F{red}'
+
+                echo -n "%{$color%}$speed Mbps \uf1eb%{%f%}" # removed char not in my PowerLine font
+        fi
+}
 
 # Load Nerd Fonts with Powerlevel9k theme for Zsh
 POWERLEVEL9K_MODE='nerdfont-complete'
@@ -104,9 +143,19 @@ ZSH_THEME="funky-pj"
 plugins=(git osx vim-interaction mvn)
 
 # User configuration
+# LShop OnBoarding
+export PATH=$PATH:/Users/$USER/bin 
+export PATH=~/bin:$PATH 
+export PATH="/usr/local/sbin:$PATH" 
 export NVM_DIR="$HOME/.nvm"
-
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm 
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion 
+export PATH=./node_modules/.bin:$PATH
 ESLINT="$NVM_DIR/current/lib/node_modules/eslint"
+
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+
 
 # Add RVM to PATH for scripting
 RVM_PATH="$HOME/.rvm/bin"
@@ -178,7 +227,7 @@ dockrun(){
 
 # NODE Setup
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-nvm use 6.11.0
+nvm use 9.11.1
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"

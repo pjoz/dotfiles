@@ -15,6 +15,7 @@ alias ctags="`brew --prefix`/bin/ctags"
 
 # App Commands
 alias jn="jupyter notebook"
+alias ca="conda activate"
 
 # Server Connections
 alias bpi="ssh pj@berkmanpi.noip.me -p 2222"

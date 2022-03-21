@@ -1,0 +1,66 @@
+{
+    "terminal.integrated.fontFamily": "'MesloLGL Nerd Font',monospace",
+    "editor.fontFamily": "MesloLGL Nerd Font Mono",
+    "omnisharp.enableImportCompletion": true,
+    "omnisharp.enableRoslynAnalyzers": true,
+    "csharp.suppressBuildAssetsNotification": true,
+    "git.autofetch": true,
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    "python.defaultInterpreterPath": "python3",
+    "vs-kubernetes": {
+        "vscode-kubernetes.minikube-path.mac": "/Users/paul/.vs-kubernetes/tools/minikube/darwin-amd64/minikube",
+        "vscode-kubernetes.helm-path.mac": "/Users/paul/.vs-kubernetes/tools/helm/darwin-amd64/helm"
+    },
+    "terminal.integrated.automationShell.linux": "/bin/bash",
+    "terminal.integrated.tabs.enabled": true,
+    "omnisharp.enableDecompilationSupport": true,
+    "omnisharp.enableMsBuildLoadProjectsOnDemand": true,
+    "omnisharp.organizeImportsOnFormat": true,
+    "csharp.semanticHighlighting.enabled": true,
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "yaml.maxItemsComputed": 15000,
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.cursorStyle": "line",
+    "editor.lineNumbers": "on",
+    "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+"editor.wordWrap": "off",
+"redhat.telemetry.enabled": true,
+"[dart]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.rulers": [
+                80
+        ],
+        "editor.selectionHighlight": false,
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        "editor.suggestSelection": "first",
+        "editor.tabCompletion": "onlySnippets",
+        "editor.wordBasedSuggestions": false
+},
+"dart.openDevTools": "flutter",
+"csharp.referencesCodeLens.enabled": false,
+"dart.debugExternalLibraries": false,
+"dart.debugSdkLibraries": false,
+"notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+},
+"update.mode": "manual",
+"editor.defaultFormatter": "ms-dotnettools.csharp",
+"editor.formatOnSave": true,
+"editor.inlineSuggest.enabled": true,
+"github.copilot.enable": {
+    "*": true,
+    "yaml": true,
+    "plaintext": false,
+    "markdown": true
+},
+"workbench.colorTheme": "Solarized Dark",
+"window.zoomLevel": 3
+}

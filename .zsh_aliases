@@ -10,29 +10,16 @@ alias realias="$EDITOR ~/.zsh_aliases;source ~/.zsh_aliases;"
 alias lh="ls -alh"
 alias lc="colorls"
 alias la="colorls -Al"
-alias grails2="/Users/pberkman/.sdkman/candidates/grails/2.5.0/bin/grails"
-alias ctags="`brew --prefix`/bin/ctags"
 
 # App Commands
-alias jn="jupyter notebook"
-alias ca="conda activate"
-
-# Server Connections
-alias bpi="ssh pj@berkmanpi.noip.me -p 2222"
+#alias jn="jupyter notebook"
+#alias ca="conda activate"
 
 # Git Commands
 alias push="git push origin"
 alias pull="git pull origin"
 alias gcm="git checkout master"
+alias gcb="git checkout -b"
 alias gap="git add -p"
 alias commit="git commit -m"
 
-# AWS Commands
-alias atr="aws_key_gen login -d 4h -r arn:aws:iam::408096535527:role/EWETEST_ReadOnly"
-alias atu="aws_key_gen login -d 4h -r arn:aws:iam::408096535527:role/User"
-alias apr="aws_key_gen login -d 4h -r arn:aws:iam::111248436868:role/EWEPROD_ReadOnly"
-alias apu="aws_key_gen login -d 4h -r arn:aws:iam::111248436868:role/User"
-alias abd="aws_key_gen login -d 1h -r arn:aws:iam::040764703330:role/ReadOnly"
-
-# Vault Commands
-alias vault-auth="vault auth -address=\"https://ewe-vault.test.expedia.com:8200\" -method=ldap username=$USER"
